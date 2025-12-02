@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PODIUM ATHLETICS — Elite Throws Training</title>
+    <meta name="description" content="NCAA Division I throws coaching expertise. Specialized training in shot put, discus, hammer throw, and javelin. Evidence-based performance coaching in San Diego.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200;12..96,800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #0a0a0a;
+            --white: #fafafa;
+            --red: #ff0000;
+            --gray: #888;
+            --light-gray: #e8e8e8;
+        }
+
+        body {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-weight: 200;
+            line-height: 1.5;
+            color: var(--black);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* Noise texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            z-index: 1000;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='4' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        strong {
+            font-weight: 800;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--white);
+            z-index: 999;
+            border-bottom: 1px solid var(--black);
+        }
+
+        nav .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+        }
+
+        nav .logo span {
+            color: var(--red);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 200;
+            font-size: 0.9rem;
+            transition: opacity 0.2s;
+            letter-spacing: 0.02em;
+        }
+
+        nav a:hover {
+            opacity: 0.5;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-weight: 800;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Hero */
+        .hero {
+            margin-top: 70px;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            background: var(--black);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255,0,0,0.15) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+        }
+
+        .hero .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 12vw, 9rem);
+            font-weight: 800;
+            line-height: 0.9;
+            letter-spacing: -0.03em;
+            margin-bottom: 2rem;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-weight: 200;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out 0.3s forwards;
+        }
+
+        .hero .meta {
+            display: flex;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out 0.5s forwards;
+        }
+
+        .hero .meta-item {
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-weight: 200;
+        }
+
+        .hero .cta {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--red);
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            transition: transform 0.2s;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out 0.7s forwards;
+        }
+
+        .hero .cta:hover {
+            transform: scale(1.05);
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* Section base */
+        section {
+            padding: 8rem 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Two column layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gray);
+            margin-bottom: 1rem;
+            font-weight: 200;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -0.02em;
+            margin-bottom: 2rem;
+        }
+
+        .large-text {
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            line-height: 1.4;
+            font-weight: 200;
+        }
+
+        /* About section - asymmetric */
+        .about {
+            background: var(--white);
+        }
+
+        .credentials {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .credential {
+            padding: 1.5rem;
+            border-left: 3px solid var(--black);
+            font-size: 1rem;
+            font-weight: 200;
+        }
+
+        /* Who we serve - full width cards */
+        .serve {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .serve-list {
+            display: grid;
+            gap: 0;
+            margin-top: 3rem;
+        }
+
+        .serve-item {
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding: 3rem 0;
+            display: grid;
+            grid-template-columns: 2fr 3fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .serve-item:last-child {
+            border-bottom: none;
+        }
+
+        .serve-item h3 {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        .serve-item p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            font-weight: 200;
+        }
+
+        .warning {
+            background: var(--red);
+            color: var(--white);
+            padding: 1rem 1.5rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            font-weight: 200;
+            border-left: 3px solid var(--white);
+        }
+
+        .warning strong {
+            font-weight: 800;
+        }
+
+        /* Philosophy - grid */
+        .philosophy {
+            background: var(--light-gray);
+        }
+
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 0;
+            margin-top: 3rem;
+            border: 1px solid var(--black);
+        }
+
+        .philosophy-item {
+            padding: 2.5rem;
+            border-right: 1px solid var(--black);
+            border-bottom: 1px solid var(--black);
+        }
+
+        .philosophy-item h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--red);
+        }
+
+        .philosophy-item p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            font-weight: 200;
+        }
+
+        .philosophy-motto {
+            margin-top: 4rem;
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-weight: 800;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        /* Training options - stacked */
+        .training {
+            background: var(--white);
+        }
+
+        .training-list {
+            margin-top: 4rem;
+        }
+
+        .training-item {
+            border-top: 1px solid var(--black);
+            padding: 3rem 0;
+        }
+
+        .training-item:last-child {
+            border-bottom: 1px solid var(--black);
+        }
+
+        .training-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .training-item h3 {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .training-item .number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--red);
+        }
+
+        .training-item p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            font-weight: 200;
+        }
+
+        .training-item ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .training-item li {
+            font-size: 0.95rem;
+            padding: 0.5rem 0;
+            font-weight: 200;
+        }
+
+        .training-item li::before {
+            content: '→ ';
+            color: var(--red);
+            font-weight: 800;
+        }
+
+        /* Pricing - large numbers */
+        .pricing {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .pricing-item {
+            border: 1px solid var(--white);
+            padding: 3rem;
+        }
+
+        .pricing-item h3 {
+            font-size: 1.2rem;
+            font-weight: 200;
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+
+        .price {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            line-height: 0.9;
+            color: var(--red);
+            margin-bottom: 0.5rem;
+        }
+
+        .price-unit {
+            font-size: 1rem;
+            font-weight: 200;
+            display: block;
+            margin-top: 0.5rem;
+        }
+
+        .pricing-item p {
+            margin-top: 2rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            font-weight: 200;
+        }
+
+        .pricing-note {
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            font-weight: 200;
+            opacity: 0.7;
+            text-align: center;
+        }
+
+        /* Compliance - structured */
+        .compliance {
+            background: var(--light-gray);
+        }
+
+        .compliance-box {
+            background: var(--white);
+            border-left: 4px solid var(--black);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .compliance-box:nth-child(odd) {
+            border-left-color: var(--red);
+        }
+
+        .compliance-box h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .compliance-box p {
+            font-size: 1rem;
+            line-height: 1.6;
+            font-weight: 200;
+        }
+
+        .compliance-box strong {
+            font-weight: 800;
+        }
+
+        .compliance-alert {
+            background: var(--red);
+            color: var(--white);
+            padding: 1rem 1.5rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* FAQ - minimalist */
+        .faq {
+            background: var(--white);
+        }
+
+        .faq-item {
+            border-top: 1px solid var(--black);
+            padding: 3rem 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: 1px solid var(--black);
+        }
+
+        .faq-item h3 {
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .faq-item p {
+            font-size: 1rem;
+            line-height: 1.7;
+            font-weight: 200;
+            max-width: 900px;
+        }
+
+        /* Contact - bold CTA */
+        .contact {
+            background: var(--red);
+            color: var(--white);
+            text-align: center;
+            padding: 10rem 2rem;
+        }
+
+        .contact h2 {
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin: 4rem 0;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            text-align: left;
+        }
+
+        .contact-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            opacity: 0.7;
+            margin-bottom: 0.5rem;
+            font-weight: 200;
+        }
+
+        .contact-item a,
+        .contact-item p {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 800;
+            transition: opacity 0.2s;
+        }
+
+        .contact-item a:hover {
+            opacity: 0.7;
+        }
+
+        .contact .cta {
+            display: inline-block;
+            padding: 1.5rem 4rem;
+            background: var(--white);
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            transition: transform 0.2s;
+            margin-top: 2rem;
+        }
+
+        .contact .cta:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 3rem 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 200;
+            opacity: 0.7;
+        }
+
+        footer p:first-child {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .two-col {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .serve-item {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .philosophy-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .philosophy-item {
+                border-right: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                flex-direction: column;
+                gap: 0;
+                border-bottom: 1px solid var(--black);
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav ul li {
+                border-bottom: 1px solid var(--light-gray);
+            }
+
+            nav ul a {
+                display: block;
+                padding: 1.5rem 2rem;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .training-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .contact-item {
+                text-align: center;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">PODIUM <span>ATHLETICS</span></div>
+            <button class="mobile-menu" onclick="toggleMenu()">☰</button>
+            <ul id="nav-menu">
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="#serve">ATHLETES</a></li>
+                <li><a href="#philosophy">PHILOSOPHY</a></li>
+                <li><a href="#training">TRAINING</a></li>
+                <li><a href="#pricing">PRICING</a></li>
+                <li><a href="#compliance">COMPLIANCE</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contact">CONTACT</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1>PODIUM<br>ATHLETICS</h1>
+            <p class="subtitle">Elite throws training. Evidence-based performance. Division I coaching expertise.</p>
+            <div class="meta">
+                <div class="meta-item">Shot Put</div>
+                <div class="meta-item">Discus</div>
+                <div class="meta-item">Hammer</div>
+                <div class="meta-item">Javelin</div>
+            </div>
+            <a href="#contact" class="cta">SCHEDULE CONSULTATION</a>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="two-col">
+                <div>
+                    <div class="section-label">COACHING CREDENTIALS</div>
+                    <h2 class="section-title">Coach Tony Sommers</h2>
+                </div>
+                <div>
+                    <p class="large-text">Division I throws coach combining elite athletic experience with advanced movement science to deliver measurable performance gains.</p>
+                    
+                    <div class="credentials">
+                        <div class="credential">NCAA Division I Throws Coach — UC San Diego Track & Field</div>
+                        <div class="credential">M.S. Movement Science — University of Michigan</div>
+                        <div class="credential">Former NCAA Division I Discus Thrower</div>
+                        <div class="credential">Kinesiology Professor — Cal State San Marcos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who We Serve -->
+    <section id="serve" class="serve">
+        <div class="container">
+            <div class="section-label">ATHLETE CATEGORIES</div>
+            <h2 class="section-title">Who We Train</h2>
+            
+            <div class="serve-list">
+                <div class="serve-item">
+                    <h3>Current Collegiate Athletes</h3>
+                    <div>
+                        <p>Athletes from all universities welcome. Elevate your performance with Division I coaching expertise while maintaining full NCAA compliance. Training provided at fair market rates independent of recruiting or institutional affiliation.</p>
+                    </div>
+                </div>
+                
+                <div class="serve-item">
+                    <h3>Post-Collegiate & Professional Throwers</h3>
+                    <div>
+                        <p>Continue your athletic career with elite-level coaching. Access proven methodologies used at the highest levels of competition. Programming designed for national and international meet preparation.</p>
+                    </div>
+                </div>
+                
+                <div class="serve-item">
+                    <h3>Youth Athletes</h3>
+                    <div>
+                        <p>Foundation building for athletes 8th grade and below. Develop proper technique early for long-term success. Age-appropriate progressions and injury prevention strategies.</p>
+                    </div>
+                </div>
+                
+                <div class="serve-item">
+                    <h3>High School Athletes<br><span style="font-size: 0.6em; font-weight: 200;">(RESTRICTED)</span></h3>
+                    <div>
+                        <p>Limited availability due to NCAA regulations. Training services for high school athletes are restricted to ensure full compliance with NCAA recruiting bylaws.</p>
+                        <div class="warning">
+                            <strong>NCAA COMPLIANCE REQUIREMENT:</strong> High school athletes must be legal residents within 50 miles of UC San Diego (La Jolla, CA) to participate in track & field throws programs per Bylaw 13.11.2.4.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy -->
+    <section id="philosophy" class="philosophy">
+        <div class="container">
+            <div class="section-label">METHODOLOGY</div>
+            <h2 class="section-title">Training Philosophy</h2>
+            
+            <div class="philosophy-grid">
+                <div class="philosophy-item">
+                    <h3>Bondarchuk Periodization</h3>
+                    <p>Elite performance gains through scientifically-validated training phases designed specifically for throwers.</p>
+                </div>
+                
+                <div class="philosophy-item">
+                    <h3>Evidence-Based Biomechanics</h3>
+                    <p>Every technique adjustment grounded in peer-reviewed research and proven competition results.</p>
+                </div>
+                
+                <div class="philosophy-item">
+                    <h3>Individualized Programming</h3>
+                    <p>Custom training plans tailored to your competition schedule, goals, and current performance level.</p>
+                </div>
+                
+                <div class="philosophy-item">
+                    <h3>Video Analysis</h3>
+                    <p>Detailed technical breakdown and comparison to elite throwers for continuous improvement.</p>
+                </div>
+                
+                <div class="philosophy-item">
+                    <h3>Strength & Power Development</h3>
+                    <p>Throws-specific strength programming to maximize force production and explosive power.</p>
+                </div>
+                
+                <div class="philosophy-item">
+                    <h3>Competition Strategy</h3>
+                    <p>Mental preparation and tactical approaches to perform when it matters most.</p>
+                </div>
+            </div>
+            
+            <p class="philosophy-motto">NO FLUFF.<br>NO BRO-SCIENCE.<br>JUST RESULTS.</p>
+        </div>
+    </section>
+
+    <!-- Training Options -->
+    <section id="training" class="training">
+        <div class="container">
+            <div class="section-label">SERVICES</div>
+            <h2 class="section-title">Training Options</h2>
+            
+            <div class="training-list">
+                <div class="training-item">
+                    <div class="training-header">
+                        <h3>1-on-1 Elite Coaching</h3>
+                        <span class="number">01</span>
+                    </div>
+                    <p>Personalized technical instruction and programming for maximum development. In-person sessions in San Diego area with remote options available.</p>
+                    <ul>
+                        <li>Complete technical analysis</li>
+                        <li>Customized training programs</li>
+                        <li>Real-time feedback</li>
+                        <li>Remote video analysis</li>
+                    </ul>
+                </div>
+                
+                <div class="training-item">
+                    <div class="training-header">
+                        <h3>Small Group Training</h3>
+                        <span class="number">02</span>
+                    </div>
+                    <p>Maximum 4 athletes per session for quality attention and competitive atmosphere. Cost-effective option with individual feedback maintained.</p>
+                    <ul>
+                        <li>Competitive environment</li>
+                        <li>Learn from partners</li>
+                        <li>Individual feedback</li>
+                        <li>Group accountability</li>
+                    </ul>
+                </div>
+                
+                <div class="training-item">
+                    <div class="training-header">
+                        <h3>Remote Programming</h3>
+                        <span class="number">03</span>
+                    </div>
+                    <p>For athletes training at their home facilities with professional guidance. Comprehensive programming and analysis without geographic limitations.</p>
+                    <ul>
+                        <li>Weekly check-ins</li>
+                        <li>Personalized programs</li>
+                        <li>Video analysis</li>
+                        <li>Competition prep</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="section-label" style="color: rgba(255,255,255,0.5);">TRANSPARENT RATES</div>
+            <h2 class="section-title">Pricing</h2>
+            
+            <div class="pricing-grid">
+                <div class="pricing-item">
+                    <h3>INDIVIDUAL SESSIONS</h3>
+                    <div class="price">$100<span class="price-unit">per hour</span></div>
+                    <p>One-on-one personalized coaching with complete attention to technique and programming development.</p>
+                </div>
+                
+                <div class="pricing-item">
+                    <h3>SMALL GROUP TRAINING</h3>
+                    <div class="price">$50<span class="price-unit">per athlete/hour</span></div>
+                    <p>Quality coaching in competitive training environment. Maximum 4 athletes per session.</p>
+                </div>
+                
+                <div class="pricing-item">
+                    <h3>MONTHLY REMOTE COACHING</h3>
+                    <div class="price">$300<span class="price-unit">per month</span></div>
+                    <p>Comprehensive programming, video analysis, and weekly check-ins for remote athletes.</p>
+                </div>
+            </div>
+            
+            <p class="pricing-note">All services priced at fair market value in accordance with industry standards and NCAA compliance requirements.</p>
+        </div>
+    </section>
+
+    <!-- Compliance -->
+    <section id="compliance" class="compliance">
+        <div class="container">
+            <div class="section-label">REGULATIONS</div>
+            <h2 class="section-title">NCAA Compliance</h2>
+            
+            <div style="margin-top: 3rem;">
+                <div class="compliance-box">
+                    <h3>Institutional Disclosure</h3>
+                    <p>Coach Sommers reports all outside coaching income to UC San Diego as required by <strong>NCAA Bylaw 11.2.2</strong>. All business activities receive proper institutional approval and oversight.</p>
+                </div>
+                
+                <div class="compliance-box">
+                    <h3>High School Athletes (Prospective Student-Athletes)</h3>
+                    <p>Due to NCAA recruiting regulations (<strong>Bylaw 13.11.2.4</strong>), we can only provide track & field throws training to high school athletes who are <strong>legal residents within 50 miles of UC San Diego's campus</strong> in La Jolla, California.</p>
+                    <div class="compliance-alert">
+                        <strong>CRITICAL:</strong> This 50-mile radius requirement ensures full compliance with NCAA local sports club regulations and protects both athlete and institution.
+                    </div>
+                </div>
+                
+                <div class="compliance-box">
+                    <h3>Current College Athletes</h3>
+                    <p>Athletes from all NCAA institutions are welcome. Training services provided at <strong>fair market rates</strong> and not affiliated with recruiting inducements or institutional incentives. Athletes responsible for ensuring expenses comply with their institution's policies.</p>
+                </div>
+                
+                <div class="compliance-box">
+                    <h3>Fair Market Value & No Pay-for-Play</h3>
+                    <p>All coaching services priced at rates commensurate with the going rate in San Diego for similar professional services. Training fees are for coaching services only and <strong>not tied to athletic performance, recruiting decisions, or institutional affiliation</strong>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <div class="section-label">QUESTIONS</div>
+            <h2 class="section-title">FAQ</h2>
+            
+            <div style="margin-top: 3rem;">
+                <div class="faq-item">
+                    <h3>I'm a high school thrower outside San Diego. Can I train with you?</h3>
+                    <p><strong>A:</strong> Due to NCAA compliance rules, I cannot provide in-person throws coaching to high school athletes outside the 50-mile radius of UC San Diego. However, I can offer remote programming and video analysis services, which are not subject to the same geographic restrictions.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>I'm a college athlete at another university. Is this allowed?</h3>
+                    <p><strong>A:</strong> Yes. Current college athletes from any institution can train with Podium Athletics. Since you're already enrolled, you're no longer considered a "prospective student-athlete" under NCAA rules. You're responsible for ensuring any training expenses comply with your institution's policies.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>How do I know if I'm within the 50-mile radius?</h3>
+                    <p><strong>A:</strong> The radius is measured from UC San Diego's campus in La Jolla, California. This generally includes most of San Diego County and southern portions of Orange County. Contact us with your home address (city) and we can verify eligibility.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>What about NIL deals?</h3>
+                    <p><strong>A:</strong> Training services must be paid at fair market value. Podium Athletics does not engage in NIL agreements tied to recruiting inducements or institutional affiliation. All coaching is provided as a professional service at standard industry rates.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>Can I train during my high school season?</h3>
+                    <p><strong>A:</strong> Yes, if you meet the 50-mile residency requirement. Training during your season is permissible under NCAA rules. Many athletes supplement their high school coaching with specialized technical work.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>Do you offer discounts for talented athletes?</h3>
+                    <p><strong>A:</strong> No. All athletes are charged the same fair market rates regardless of ability level. Providing discounted rates based on athletic ability would violate NCAA amateurism rules and compromise your eligibility.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>REACH THE<br>PODIUM</h2>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-label">EMAIL</div>
+                    <a href="mailto:coach@podiumathletics.com">coach@podiumathletics.com</a>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-label">PHONE</div>
+                    <a href="tel:+15555551234">(555) 555-1234</a>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-label">LOCATION</div>
+                    <p>San Diego, CA</p>
+                </div>
+            </div>
+            
+            <a href="mailto:coach@podiumathletics.com" class="cta">SCHEDULE CONSULTATION</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2024 PODIUM ATHLETICS — All rights reserved</p>
+            <p>Operating in full compliance with NCAA regulations | Coach Tony Sommers, UC San Diego Track & Field</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('nav-menu').classList.toggle('active');
+        }
+
+        // Close menu on link click
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('nav-menu').classList.remove('active');
+            });
+        });
+
+        // Smooth scroll with offset
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    window.scrollTo({
+                        top: target.offsetTop - offset,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
