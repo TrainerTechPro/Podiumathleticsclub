@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PODIUM ATHLETICS — Elite Throws Training</title>
     <meta name="description" content="NCAA Division I throws coaching expertise. Specialized training in shot put, discus, hammer throw, and javelin. Evidence-based performance coaching in San Diego.">
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
     <style>
         * {
             margin: 0;
@@ -21,46 +21,90 @@
             --black: #0a0a0a;
             --white: #fafafa;
             --gold: #C9A227;
+            --gold-light: #e8d48a;
+            --gold-dark: #9a7b1c;
             --gray: #6b6b6b;
-            --light-gray: #d4d4d4;
-            --dark-gray: #2a2a2a;
+            --light-gray: #f0f0f0;
+            --dark-gray: #1a1a1a;
+            --medium-gray: #2a2a2a;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Oswald', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-weight: 400;
-            line-height: 1.5;
+            line-height: 1.6;
             color: var(--black);
             background: var(--white);
             overflow-x: hidden;
         }
 
+        h1, h2, h3, h4, h5, h6, .font-display {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        /* Animated gradient background */
+        .gradient-bg {
+            background: linear-gradient(-45deg, var(--black), var(--dark-gray), var(--medium-gray), var(--black));
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         /* Noise texture overlay */
-        body::before {
+        .noise-overlay::before {
             content: '';
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            opacity: 0.03;
-            z-index: 1000;
+            opacity: 0.04;
             pointer-events: none;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='4' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
-        strong {
-            font-weight: 700;
+        /* Scroll reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
 
         /* Navigation */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: var(--white);
             z-index: 999;
-            border-bottom: 1px solid var(--black);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        nav.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
 
         nav .container {
@@ -73,37 +117,66 @@
         }
 
         nav .logo {
-            font-size: 1rem;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
             font-weight: 700;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.1em;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         nav .logo span {
             color: var(--gold);
         }
 
+        nav .logo::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            transform: rotate(45deg);
+        }
+
         nav ul {
             display: flex;
             list-style: none;
-            gap: 2.5rem;
+            gap: 2rem;
         }
 
         nav a {
-            color: var(--black);
+            color: rgba(255,255,255,0.7);
             text-decoration: none;
             font-weight: 400;
-            font-size: 0.9rem;
-            transition: opacity 0.2s;
-            letter-spacing: 0.02em;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s ease;
         }
 
         nav a:hover {
-            opacity: 0.5;
+            color: var(--white);
+        }
+
+        nav a:hover::after {
+            width: 100%;
         }
 
         .mobile-menu {
             display: none;
-            font-weight: 700;
+            color: var(--white);
             font-size: 1.5rem;
             background: none;
             border: none;
@@ -112,99 +185,432 @@
 
         /* Hero */
         .hero {
-            margin-top: 70px;
-            min-height: 90vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            background: var(--black);
-            color: var(--white);
             position: relative;
             overflow: hidden;
+            color: var(--white);
         }
 
-        .hero::before {
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: var(--black);
+        }
+
+        .hero-bg::after {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(201,162,39,0.2) 0%, transparent 70%);
-            transform: translate(-50%, -50%);
+            top: 20%;
+            right: -10%;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(201,162,39,0.15) 0%, transparent 60%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(to top, var(--black), transparent);
+            z-index: 1;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.15; }
+            50% { transform: scale(1.1); opacity: 0.25; }
         }
 
         .hero .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 4rem 2rem;
+            padding: 8rem 2rem 4rem;
             position: relative;
             z-index: 2;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
         }
 
-        .hero h1 {
-            font-size: clamp(3rem, 12vw, 9rem);
-            font-weight: 700;
+        .hero-content h1 {
+            font-size: clamp(3.5rem, 10vw, 8rem);
             line-height: 0.9;
-            letter-spacing: -0.03em;
-            margin-bottom: 2rem;
-            animation: slideUp 0.8s ease-out;
+            margin-bottom: 1.5rem;
         }
 
-        .hero .subtitle {
-            font-size: clamp(1.2rem, 3vw, 2rem);
-            font-weight: 400;
-            margin-bottom: 3rem;
-            max-width: 600px;
-            opacity: 0;
-            animation: fadeIn 0.8s ease-out 0.3s forwards;
+        .hero-content h1 .line {
+            display: block;
+            overflow: hidden;
         }
 
-        .hero .meta {
-            display: flex;
-            gap: 3rem;
-            flex-wrap: wrap;
-            margin-bottom: 3rem;
-            opacity: 0;
-            animation: fadeIn 0.8s ease-out 0.5s forwards;
+        .hero-content h1 .line span {
+            display: block;
+            animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: var(--delay, 0s);
         }
 
-        .hero .meta-item {
-            font-size: 0.85rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            font-weight: 400;
-        }
-
-        .hero .cta {
-            display: inline-block;
-            padding: 1.2rem 3rem;
-            background: var(--gold);
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.9rem;
-            letter-spacing: 0.05em;
-            transition: transform 0.2s;
-            opacity: 0;
-            animation: fadeIn 0.8s ease-out 0.7s forwards;
-        }
-
-        .hero .cta:hover {
-            transform: scale(1.05);
+        .hero-content h1 .gold {
+            color: var(--gold);
+            -webkit-text-stroke: 0;
         }
 
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.7);
+            max-width: 500px;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeIn 0.8s ease 0.6s forwards;
         }
 
         @keyframes fadeIn {
             to { opacity: 1; }
         }
 
+        .hero-disciplines {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeIn 0.8s ease 0.8s forwards;
+        }
+
+        .discipline {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .discipline::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+
+        .hero-cta {
+            opacity: 0;
+            animation: fadeIn 0.8s ease 1s forwards;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gold-light);
+            transform: translateX(-100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-primary:hover::before {
+            transform: translateX(0);
+        }
+
+        .btn-primary span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(201, 162, 39, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .btn-arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover .btn-arrow {
+            transform: translateX(4px);
+        }
+
+        /* Stats bar in hero */
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            padding: 2.5rem;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            animation: fadeIn 0.8s ease 1.2s forwards;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* Email Squeeze Section */
+        .squeeze {
+            background: var(--dark-gray);
+            position: relative;
+            overflow: hidden;
+            padding: 6rem 2rem;
+        }
+
+        .squeeze::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .squeeze::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 60%;
+            height: 200%;
+            background: radial-gradient(ellipse, rgba(201,162,39,0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .squeeze .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .squeeze-inner {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .squeeze-content {
+            color: var(--white);
+        }
+
+        .squeeze-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(201,162,39,0.1);
+            border: 1px solid rgba(201,162,39,0.3);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .squeeze-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .squeeze h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .squeeze h2 span {
+            color: var(--gold);
+        }
+
+        .squeeze-description {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .squeeze-benefits {
+            list-style: none;
+            margin-bottom: 0;
+        }
+
+        .squeeze-benefits li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .squeeze-benefits li:last-child {
+            border-bottom: none;
+        }
+
+        .squeeze-benefits li::before {
+            content: '✓';
+            color: var(--gold);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* Email Form */
+        .squeeze-form {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 2.5rem;
+            position: relative;
+        }
+
+        .squeeze-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 2rem;
+            right: 2rem;
+            height: 2px;
+            background: var(--gold);
+        }
+
+        .form-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-subtitle {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: rgba(201,162,39,0.05);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255,255,255,0.3);
+        }
+
+        .squeeze-form .btn {
+            width: 100%;
+            justify-content: center;
+            margin-top: 0.5rem;
+            padding: 1.2rem 2rem;
+        }
+
+        .form-privacy {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.3);
+            text-align: center;
+            margin-top: 1rem;
+        }
+
         /* Section base */
         section {
             padding: 8rem 2rem;
+            position: relative;
         }
 
         .container {
@@ -212,148 +618,247 @@
             margin: 0 auto;
         }
 
-        /* Two column layout */
-        .two-col {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: start;
+        /* Section headers */
+        .section-header {
+            margin-bottom: 4rem;
         }
 
         .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
             font-size: 0.75rem;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
             color: var(--gray);
             margin-bottom: 1rem;
-            font-weight: 400;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: var(--gold);
         }
 
         .section-title {
-            font-size: clamp(2.5rem, 6vw, 5rem);
-            font-weight: 700;
+            font-size: clamp(2.5rem, 5vw, 4rem);
             line-height: 1;
-            letter-spacing: -0.02em;
-            margin-bottom: 2rem;
         }
 
-        .large-text {
-            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-            line-height: 1.4;
-            font-weight: 400;
+        .section-title span {
+            color: var(--gold);
         }
 
-        /* About section - asymmetric */
+        /* About section */
         .about {
             background: var(--white);
+        }
+
+        .about .container {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 6rem;
+            align-items: start;
+        }
+
+        .about-content .large-text {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            color: var(--gray);
+            margin-bottom: 2rem;
         }
 
         .credentials {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
-            margin-top: 3rem;
+            gap: 1rem;
         }
 
         .credential {
-            padding: 1.5rem;
-            border-left: 3px solid var(--black);
-            font-size: 1rem;
-            font-weight: 400;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.25rem;
+            background: var(--light-gray);
+            transition: all 0.3s ease;
         }
 
-        /* Who we serve - full width cards */
+        .credential:hover {
+            background: var(--black);
+            color: var(--white);
+            transform: translateX(8px);
+        }
+
+        .credential::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            margin-top: 0.4rem;
+            flex-shrink: 0;
+        }
+
+        /* Who we serve */
         .serve {
             background: var(--black);
             color: var(--white);
+            position: relative;
+            overflow: hidden;
         }
 
-        .serve-list {
+        .serve::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 50%, rgba(201,162,39,0.03) 50%);
+            pointer-events: none;
+        }
+
+        .serve-grid {
             display: grid;
-            gap: 0;
-            margin-top: 3rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2px;
+            background: rgba(255,255,255,0.1);
+            margin-top: 4rem;
         }
 
         .serve-item {
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-            padding: 3rem 0;
-            display: grid;
-            grid-template-columns: 2fr 3fr;
-            gap: 3rem;
-            align-items: start;
+            background: var(--black);
+            padding: 3rem;
+            position: relative;
+            transition: all 0.4s ease;
         }
 
-        .serve-item:last-child {
-            border-bottom: none;
+        .serve-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: var(--gold);
+            transition: height 0.4s ease;
+        }
+
+        .serve-item:hover::before {
+            height: 100%;
+        }
+
+        .serve-item:hover {
+            background: var(--dark-gray);
         }
 
         .serve-item h3 {
-            font-size: clamp(1.5rem, 3vw, 2.5rem);
-            font-weight: 700;
-            line-height: 1.1;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .serve-item:hover h3 {
+            color: var(--gold);
         }
 
         .serve-item p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            font-weight: 400;
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.7;
         }
 
-        .warning {
-            background: var(--gold);
-            color: var(--white);
-            padding: 1rem 1.5rem;
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            font-weight: 400;
-            border-left: 3px solid var(--white);
+        .serve-warning {
+            background: rgba(201,162,39,0.1);
+            border-left: 3px solid var(--gold);
+            padding: 1rem 1.25rem;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--gold);
         }
 
-        .warning strong {
-            font-weight: 700;
-        }
-
-        /* Philosophy - grid */
+        /* Philosophy */
         .philosophy {
             background: var(--light-gray);
+            position: relative;
         }
 
         .philosophy-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 0;
-            margin-top: 3rem;
-            border: 1px solid var(--black);
+            margin-top: 4rem;
         }
 
         .philosophy-item {
             padding: 2.5rem;
-            border-right: 1px solid var(--black);
-            border-bottom: 1px solid var(--black);
+            background: var(--white);
+            border: 1px solid rgba(0,0,0,0.06);
+            margin: -1px 0 0 -1px;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .philosophy-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .philosophy-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .philosophy-item:hover {
+            background: var(--black);
+            color: var(--white);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            z-index: 2;
         }
 
         .philosophy-item h3 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            color: var(--gold);
+        }
+
+        .philosophy-item:hover h3 {
             color: var(--gold);
         }
 
         .philosophy-item p {
-            font-size: 0.95rem;
-            line-height: 1.5;
-            font-weight: 400;
+            font-size: 0.9rem;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        .philosophy-item:hover p {
+            color: rgba(255,255,255,0.7);
         }
 
         .philosophy-motto {
-            margin-top: 4rem;
-            font-size: clamp(1.5rem, 4vw, 3rem);
-            font-weight: 700;
+            margin-top: 5rem;
             text-align: center;
-            line-height: 1.2;
         }
 
-        /* Training options - stacked */
+        .philosophy-motto h3 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            line-height: 1.1;
+        }
+
+        .philosophy-motto .gold {
+            color: var(--gold);
+        }
+
+        /* Training */
         .training {
             background: var(--white);
         }
@@ -363,195 +868,335 @@
         }
 
         .training-item {
-            border-top: 1px solid var(--black);
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 3rem;
             padding: 3rem 0;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            align-items: start;
+            transition: all 0.3s ease;
         }
 
         .training-item:last-child {
-            border-bottom: 1px solid var(--black);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
         }
 
-        .training-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
+        .training-item:hover {
+            padding-left: 1rem;
+        }
+
+        .training-number {
+            font-family: 'Oswald', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--light-gray);
+            line-height: 1;
+            transition: color 0.3s ease;
+        }
+
+        .training-item:hover .training-number {
+            color: var(--gold);
+        }
+
+        .training-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .training-content p {
+            font-size: 1rem;
+            color: var(--gray);
             margin-bottom: 1.5rem;
+            max-width: 600px;
+        }
+
+        .training-features {
+            display: flex;
             flex-wrap: wrap;
             gap: 1rem;
-        }
-
-        .training-item h3 {
-            font-size: clamp(1.8rem, 4vw, 3rem);
-            font-weight: 700;
-            line-height: 1;
-        }
-
-        .training-item .number {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--gold);
-        }
-
-        .training-item p {
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-            font-weight: 400;
-        }
-
-        .training-item ul {
             list-style: none;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .training-features li {
+            display: flex;
+            align-items: center;
             gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--gray);
+            padding: 0.5rem 1rem;
+            background: var(--light-gray);
+            transition: all 0.3s ease;
         }
 
-        .training-item li {
-            font-size: 0.95rem;
-            padding: 0.5rem 0;
-            font-weight: 400;
-        }
-
-        .training-item li::before {
-            content: '→ ';
+        .training-features li::before {
+            content: '→';
             color: var(--gold);
             font-weight: 700;
         }
 
-        /* Pricing - large numbers */
-        .pricing {
+        .training-item:hover .training-features li {
             background: var(--black);
             color: var(--white);
         }
 
+        /* Pricing */
+        .pricing {
+            background: var(--black);
+            color: var(--white);
+            position: relative;
+        }
+
+        .pricing::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at bottom right, rgba(201,162,39,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
             margin-top: 4rem;
         }
 
         .pricing-item {
-            border: 1px solid var(--white);
-            padding: 3rem;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 2.5rem;
+            position: relative;
+            transition: all 0.4s ease;
         }
 
-        .pricing-item h3 {
-            font-size: 1.2rem;
-            font-weight: 400;
+        .pricing-item:hover {
+            background: rgba(201,162,39,0.05);
+            border-color: var(--gold);
+            transform: translateY(-8px);
+        }
+
+        .pricing-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .pricing-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .pricing-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: rgba(255,255,255,0.5);
             margin-bottom: 2rem;
-            letter-spacing: 0.05em;
         }
 
-        .price {
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 700;
-            line-height: 0.9;
-            color: var(--gold);
+        .pricing-amount {
+            display: flex;
+            align-items: baseline;
+            gap: 0.25rem;
             margin-bottom: 0.5rem;
         }
 
-        .price-unit {
-            font-size: 1rem;
-            font-weight: 400;
-            display: block;
-            margin-top: 0.5rem;
+        .pricing-currency {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            color: var(--gold);
         }
 
-        .pricing-item p {
-            margin-top: 2rem;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            font-weight: 400;
+        .pricing-value {
+            font-family: 'Oswald', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+        }
+
+        .pricing-unit {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-description {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.6;
         }
 
         .pricing-note {
-            margin-top: 3rem;
-            font-size: 0.9rem;
-            font-weight: 400;
-            opacity: 0.7;
             text-align: center;
+            margin-top: 3rem;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.4);
         }
 
-        /* Compliance - structured */
+        /* Compliance */
         .compliance {
             background: var(--light-gray);
         }
 
-        .compliance-box {
-            background: var(--white);
-            border-left: 4px solid var(--black);
-            padding: 2.5rem;
-            margin-bottom: 2rem;
+        .compliance-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
         }
 
-        .compliance-box:nth-child(odd) {
-            border-left-color: var(--gold);
+        .compliance-box {
+            background: var(--white);
+            padding: 2.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .compliance-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--black);
+        }
+
+        .compliance-box:nth-child(odd)::before {
+            background: var(--gold);
+        }
+
+        .compliance-box:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
         }
 
         .compliance-box h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 1.2rem;
             margin-bottom: 1rem;
         }
 
         .compliance-box p {
-            font-size: 1rem;
-            line-height: 1.6;
-            font-weight: 400;
+            font-size: 0.95rem;
+            color: var(--gray);
+            line-height: 1.7;
         }
 
         .compliance-box strong {
-            font-weight: 700;
+            color: var(--black);
+            font-weight: 500;
         }
 
         .compliance-alert {
             background: var(--gold);
-            color: var(--white);
-            padding: 1rem 1.5rem;
+            color: var(--black);
+            padding: 1rem;
             margin-top: 1rem;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            font-weight: 500;
         }
 
-        /* FAQ - minimalist */
+        /* FAQ */
         .faq {
             background: var(--white);
         }
 
+        .faq-list {
+            margin-top: 4rem;
+        }
+
         .faq-item {
-            border-top: 1px solid var(--black);
-            padding: 3rem 0;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            padding: 2rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
         .faq-item:last-child {
-            border-bottom: 1px solid var(--black);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
         }
 
-        .faq-item h3 {
-            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-            font-weight: 700;
-            margin-bottom: 1rem;
-            line-height: 1.3;
+        .faq-item:hover {
+            padding-left: 1rem;
         }
 
-        .faq-item p {
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 2rem;
+        }
+
+        .faq-question h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        .faq-toggle {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            padding-top: 1.5rem;
             font-size: 1rem;
+            color: var(--gray);
             line-height: 1.7;
-            font-weight: 400;
-            max-width: 900px;
+            max-width: 800px;
         }
 
-        /* Contact - bold CTA */
+        /* Contact */
         .contact {
             background: var(--gold);
-            color: var(--white);
+            color: var(--black);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 200%;
+            background: radial-gradient(ellipse, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .contact .container {
+            position: relative;
+            z-index: 2;
             text-align: center;
-            padding: 10rem 2rem;
         }
 
         .contact h2 {
             font-size: clamp(3rem, 8vw, 7rem);
-            font-weight: 700;
-            line-height: 1;
+            line-height: 0.95;
             margin-bottom: 2rem;
         }
 
@@ -564,46 +1209,42 @@
         }
 
         .contact-item {
-            text-align: left;
+            text-align: center;
         }
 
         .contact-label {
-            font-size: 0.75rem;
-            letter-spacing: 0.15em;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
-            opacity: 0.7;
+            opacity: 0.6;
             margin-bottom: 0.5rem;
-            font-weight: 400;
         }
 
         .contact-item a,
         .contact-item p {
-            color: var(--white);
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--black);
             text-decoration: none;
-            font-size: 1.3rem;
-            font-weight: 700;
-            transition: opacity 0.2s;
+            transition: opacity 0.3s ease;
         }
 
         .contact-item a:hover {
-            opacity: 0.7;
+            opacity: 0.6;
         }
 
-        .contact .cta {
-            display: inline-block;
-            padding: 1.5rem 4rem;
-            background: var(--white);
-            color: var(--black);
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1rem;
-            letter-spacing: 0.05em;
-            transition: transform 0.2s;
-            margin-top: 2rem;
+        .contact .btn-primary {
+            background: var(--black);
+            color: var(--white);
         }
 
-        .contact .cta:hover {
-            transform: scale(1.05);
+        .contact .btn-primary::before {
+            background: var(--dark-gray);
+        }
+
+        .contact .btn-primary:hover {
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
         }
 
         /* Footer */
@@ -611,34 +1252,78 @@
             background: var(--black);
             color: var(--white);
             padding: 3rem 2rem;
-            text-align: center;
-            font-size: 0.85rem;
-            font-weight: 400;
-            opacity: 0.7;
         }
 
-        footer p:first-child {
-            margin-bottom: 0.5rem;
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        footer p {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.4);
+        }
+
+        footer .logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        footer .logo span {
+            color: var(--gold);
+        }
+
+        footer .logo::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--gold);
+            transform: rotate(45deg);
         }
 
         /* Responsive */
         @media (max-width: 1024px) {
-            .two-col {
+            .hero .container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .squeeze-inner {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
 
-            .serve-item {
+            .about .container {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
+                gap: 3rem;
+            }
+
+            .serve-grid {
+                grid-template-columns: 1fr;
             }
 
             .philosophy-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .pricing-grid {
                 grid-template-columns: 1fr;
             }
 
-            .philosophy-item {
-                border-right: none;
+            .compliance-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -646,39 +1331,59 @@
             nav ul {
                 display: none;
                 position: fixed;
-                top: 70px;
+                top: 0;
                 left: 0;
                 right: 0;
-                background: var(--white);
+                bottom: 0;
+                background: rgba(10,10,10,0.98);
                 flex-direction: column;
-                gap: 0;
-                border-bottom: 1px solid var(--black);
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
             }
 
             nav ul.active {
                 display: flex;
             }
 
-            nav ul li {
-                border-bottom: 1px solid var(--light-gray);
-            }
-
             nav ul a {
-                display: block;
-                padding: 1.5rem 2rem;
+                font-size: 1.5rem;
             }
 
             .mobile-menu {
                 display: block;
+                z-index: 1001;
+            }
+
+            .hero-content h1 {
+                font-size: clamp(2.5rem, 12vw, 5rem);
+            }
+
+            .hero-disciplines {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
 
             section {
-                padding: 4rem 1.5rem;
+                padding: 5rem 1.5rem;
             }
 
-            .training-header {
-                flex-direction: column;
-                align-items: flex-start;
+            .philosophy-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .training-item {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .training-number {
+                font-size: 2.5rem;
             }
 
             .contact-info {
@@ -686,67 +1391,129 @@
                 gap: 2rem;
             }
 
-            .contact-item {
+            footer .container {
+                flex-direction: column;
                 text-align: center;
             }
-        }
-
-        html {
-            scroll-behavior: smooth;
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav>
+    <nav id="navbar">
         <div class="container">
             <div class="logo">PODIUM <span>ATHLETICS</span></div>
-            <button class="mobile-menu" onclick="toggleMenu()">☰</button>
+            <button class="mobile-menu" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
             <ul id="nav-menu">
-                <li><a href="#about">ABOUT</a></li>
-                <li><a href="#serve">ATHLETES</a></li>
-                <li><a href="#philosophy">PHILOSOPHY</a></li>
-                <li><a href="#training">TRAINING</a></li>
-                <li><a href="#pricing">PRICING</a></li>
-                <li><a href="#compliance">COMPLIANCE</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#serve">Athletes</a></li>
+                <li><a href="#philosophy">Philosophy</a></li>
+                <li><a href="#training">Training</a></li>
+                <li><a href="#pricing">Pricing</a></li>
                 <li><a href="#faq">FAQ</a></li>
-                <li><a href="#contact">CONTACT</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
     </nav>
 
     <!-- Hero -->
     <section class="hero">
+        <div class="hero-bg gradient-bg noise-overlay"></div>
         <div class="container">
-            <h1>PODIUM<br>ATHLETICS</h1>
-            <p class="subtitle">Elite throws training. Evidence-based performance. Division I coaching expertise.</p>
-            <div class="meta">
-                <div class="meta-item">Shot Put</div>
-                <div class="meta-item">Discus</div>
-                <div class="meta-item">Hammer</div>
-                <div class="meta-item">Javelin</div>
+            <div class="hero-content">
+                <h1>
+                    <span class="line"><span style="--delay: 0.1s">PODIUM</span></span>
+                    <span class="line"><span class="gold" style="--delay: 0.2s">ATHLETICS</span></span>
+                </h1>
+                <p class="hero-subtitle">Elite throws training backed by NCAA Division I coaching expertise and evidence-based performance science.</p>
+                <div class="hero-disciplines">
+                    <span class="discipline">Shot Put</span>
+                    <span class="discipline">Discus</span>
+                    <span class="discipline">Hammer</span>
+                    <span class="discipline">Javelin</span>
+                </div>
+                <div class="hero-cta">
+                    <a href="#contact" class="btn btn-primary">
+                        <span>Schedule Consultation</span>
+                        <span class="btn-arrow">→</span>
+                    </a>
+                </div>
             </div>
-            <a href="#contact" class="cta">SCHEDULE CONSULTATION</a>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number">D1</div>
+                    <div class="stat-label">NCAA Coaching</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">NCAA Compliant</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Email Squeeze Section -->
+    <section class="squeeze" id="free-guide">
+        <div class="container">
+            <div class="squeeze-inner">
+                <div class="squeeze-content reveal">
+                    <div class="squeeze-badge">Free Training Resource</div>
+                    <h2>Get the <span>7-Day Elite Throws Blueprint</span></h2>
+                    <p class="squeeze-description">The same technical progressions I use with D1 athletes, delivered straight to your inbox. Build a foundation that actually translates to competition performance.</p>
+                    <ul class="squeeze-benefits">
+                        <li>Daily technique drills with video breakdowns</li>
+                        <li>Strength exercises specific to throwers</li>
+                        <li>Mental preparation strategies for meets</li>
+                        <li>Common mistakes that kill your distance</li>
+                        <li>Programming principles from Bondarchuk methodology</li>
+                    </ul>
+                </div>
+                <div class="squeeze-form reveal reveal-delay-2">
+                    <div class="form-title">Start Your 7-Day Blueprint</div>
+                    <div class="form-subtitle">Join 500+ throwers improving their technique</div>
+                    <form action="#" method="POST" onsubmit="handleSubmit(event)">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="event">Primary Event</label>
+                            <input type="text" id="event" name="event" placeholder="Shot put, discus, etc.">
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <span>Send Me the Blueprint</span>
+                            <span class="btn-arrow">→</span>
+                        </button>
+                    </form>
+                    <p class="form-privacy">No spam. Unsubscribe anytime. Your email stays private.</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- About -->
     <section id="about" class="about">
         <div class="container">
-            <div class="two-col">
-                <div>
-                    <div class="section-label">COACHING CREDENTIALS</div>
-                    <h2 class="section-title">Coach Tony Sommers</h2>
-                </div>
-                <div>
-                    <p class="large-text">Division I throws coach combining elite athletic experience with advanced movement science to deliver measurable performance gains.</p>
-                    
-                    <div class="credentials">
-                        <div class="credential">NCAA Division I Throws Coach — UC San Diego Track & Field</div>
-                        <div class="credential">M.S. Movement Science — University of Michigan</div>
-                        <div class="credential">Former NCAA Division I Discus Thrower</div>
-                        <div class="credential">Kinesiology Professor — Cal State San Marcos</div>
-                    </div>
+            <div class="section-header reveal">
+                <div class="section-label">Coaching Credentials</div>
+                <h2 class="section-title">Coach Tony <span>Sommers</span></h2>
+            </div>
+            <div class="about-content reveal reveal-delay-1">
+                <p class="large-text">Division I throws coach combining elite athletic experience with advanced movement science to deliver measurable performance gains.</p>
+
+                <div class="credentials">
+                    <div class="credential">NCAA Division I Throws Coach — UC San Diego Track & Field</div>
+                    <div class="credential">M.S. Movement Science — University of Michigan</div>
+                    <div class="credential">Former NCAA Division I Discus Thrower</div>
+                    <div class="credential">Kinesiology Professor — Cal State San Marcos</div>
                 </div>
             </div>
         </div>
@@ -755,38 +1522,32 @@
     <!-- Who We Serve -->
     <section id="serve" class="serve">
         <div class="container">
-            <div class="section-label">ATHLETE CATEGORIES</div>
-            <h2 class="section-title">Who We Train</h2>
-            
-            <div class="serve-list">
-                <div class="serve-item">
+            <div class="section-header reveal">
+                <div class="section-label" style="color: rgba(255,255,255,0.4);">Athlete Categories</div>
+                <h2 class="section-title">Who We <span>Train</span></h2>
+            </div>
+
+            <div class="serve-grid">
+                <div class="serve-item reveal">
                     <h3>Current Collegiate Athletes</h3>
-                    <div>
-                        <p>Athletes from all universities welcome. Elevate your performance with Division I coaching expertise while maintaining full NCAA compliance. Training provided at fair market rates independent of recruiting or institutional affiliation.</p>
-                    </div>
+                    <p>Athletes from all universities welcome. Elevate your performance with Division I coaching expertise while maintaining full NCAA compliance. Training provided at fair market rates independent of recruiting or institutional affiliation.</p>
                 </div>
-                
-                <div class="serve-item">
-                    <h3>Post-Collegiate & Professional Throwers</h3>
-                    <div>
-                        <p>Continue your athletic career with elite-level coaching. Access proven methodologies used at the highest levels of competition. Programming designed for national and international meet preparation.</p>
-                    </div>
+
+                <div class="serve-item reveal reveal-delay-1">
+                    <h3>Post-Collegiate & Pro Throwers</h3>
+                    <p>Continue your athletic career with elite-level coaching. Access proven methodologies used at the highest levels of competition. Programming designed for national and international meet preparation.</p>
                 </div>
-                
-                <div class="serve-item">
+
+                <div class="serve-item reveal reveal-delay-2">
                     <h3>Youth Athletes</h3>
-                    <div>
-                        <p>Foundation building for athletes 8th grade and below. Develop proper technique early for long-term success. Age-appropriate progressions and injury prevention strategies.</p>
-                    </div>
+                    <p>Foundation building for athletes 8th grade and below. Develop proper technique early for long-term success. Age-appropriate progressions and injury prevention strategies.</p>
                 </div>
-                
-                <div class="serve-item">
-                    <h3>High School Athletes<br><span style="font-size: 0.6em; font-weight: 400;">(RESTRICTED)</span></h3>
-                    <div>
-                        <p>Limited availability due to NCAA regulations. Training services for high school athletes are restricted to ensure full compliance with NCAA recruiting bylaws.</p>
-                        <div class="warning">
-                            <strong>NCAA COMPLIANCE REQUIREMENT:</strong> High school athletes must be legal residents within 50 miles of UC San Diego (La Jolla, CA) to participate in track & field throws programs per Bylaw 13.11.2.4.
-                        </div>
+
+                <div class="serve-item reveal reveal-delay-3">
+                    <h3>High School Athletes <span style="opacity: 0.5; font-size: 0.6em;">(Restricted)</span></h3>
+                    <p>Limited availability due to NCAA regulations. Training services for high school athletes are restricted to ensure full compliance with NCAA recruiting bylaws.</p>
+                    <div class="serve-warning">
+                        <strong>NCAA Requirement:</strong> Must be legal residents within 50 miles of UC San Diego (La Jolla, CA) per Bylaw 13.11.2.4.
                     </div>
                 </div>
             </div>
@@ -796,92 +1557,98 @@
     <!-- Philosophy -->
     <section id="philosophy" class="philosophy">
         <div class="container">
-            <div class="section-label">METHODOLOGY</div>
-            <h2 class="section-title">Training Philosophy</h2>
-            
+            <div class="section-header reveal">
+                <div class="section-label">Methodology</div>
+                <h2 class="section-title">Training <span>Philosophy</span></h2>
+            </div>
+
             <div class="philosophy-grid">
-                <div class="philosophy-item">
+                <div class="philosophy-item reveal">
                     <h3>Bondarchuk Periodization</h3>
                     <p>Elite performance gains through scientifically-validated training phases designed specifically for throwers.</p>
                 </div>
-                
-                <div class="philosophy-item">
+
+                <div class="philosophy-item reveal reveal-delay-1">
                     <h3>Evidence-Based Biomechanics</h3>
                     <p>Every technique adjustment grounded in peer-reviewed research and proven competition results.</p>
                 </div>
-                
-                <div class="philosophy-item">
+
+                <div class="philosophy-item reveal reveal-delay-2">
                     <h3>Individualized Programming</h3>
                     <p>Custom training plans tailored to your competition schedule, goals, and current performance level.</p>
                 </div>
-                
-                <div class="philosophy-item">
+
+                <div class="philosophy-item reveal reveal-delay-1">
                     <h3>Video Analysis</h3>
                     <p>Detailed technical breakdown and comparison to elite throwers for continuous improvement.</p>
                 </div>
-                
-                <div class="philosophy-item">
-                    <h3>Strength & Power Development</h3>
+
+                <div class="philosophy-item reveal reveal-delay-2">
+                    <h3>Strength & Power</h3>
                     <p>Throws-specific strength programming to maximize force production and explosive power.</p>
                 </div>
-                
-                <div class="philosophy-item">
+
+                <div class="philosophy-item reveal reveal-delay-3">
                     <h3>Competition Strategy</h3>
                     <p>Mental preparation and tactical approaches to perform when it matters most.</p>
                 </div>
             </div>
-            
-            <p class="philosophy-motto">NO FLUFF.<br>NO BRO-SCIENCE.<br>JUST RESULTS.</p>
+
+            <div class="philosophy-motto reveal">
+                <h3>No Fluff. No Bro-Science.<br><span class="gold">Just Results.</span></h3>
+            </div>
         </div>
     </section>
 
     <!-- Training Options -->
     <section id="training" class="training">
         <div class="container">
-            <div class="section-label">SERVICES</div>
-            <h2 class="section-title">Training Options</h2>
-            
+            <div class="section-header reveal">
+                <div class="section-label">Services</div>
+                <h2 class="section-title">Training <span>Options</span></h2>
+            </div>
+
             <div class="training-list">
-                <div class="training-item">
-                    <div class="training-header">
+                <div class="training-item reveal">
+                    <div class="training-number">01</div>
+                    <div class="training-content">
                         <h3>1-on-1 Elite Coaching</h3>
-                        <span class="number">01</span>
+                        <p>Personalized technical instruction and programming for maximum development. In-person sessions in San Diego area with remote options available.</p>
+                        <ul class="training-features">
+                            <li>Complete technical analysis</li>
+                            <li>Customized training programs</li>
+                            <li>Real-time feedback</li>
+                            <li>Remote video analysis</li>
+                        </ul>
                     </div>
-                    <p>Personalized technical instruction and programming for maximum development. In-person sessions in San Diego area with remote options available.</p>
-                    <ul>
-                        <li>Complete technical analysis</li>
-                        <li>Customized training programs</li>
-                        <li>Real-time feedback</li>
-                        <li>Remote video analysis</li>
-                    </ul>
                 </div>
-                
-                <div class="training-item">
-                    <div class="training-header">
+
+                <div class="training-item reveal">
+                    <div class="training-number">02</div>
+                    <div class="training-content">
                         <h3>Small Group Training</h3>
-                        <span class="number">02</span>
+                        <p>Maximum 4 athletes per session for quality attention and competitive atmosphere. Cost-effective option with individual feedback maintained.</p>
+                        <ul class="training-features">
+                            <li>Competitive environment</li>
+                            <li>Learn from partners</li>
+                            <li>Individual feedback</li>
+                            <li>Group accountability</li>
+                        </ul>
                     </div>
-                    <p>Maximum 4 athletes per session for quality attention and competitive atmosphere. Cost-effective option with individual feedback maintained.</p>
-                    <ul>
-                        <li>Competitive environment</li>
-                        <li>Learn from partners</li>
-                        <li>Individual feedback</li>
-                        <li>Group accountability</li>
-                    </ul>
                 </div>
-                
-                <div class="training-item">
-                    <div class="training-header">
+
+                <div class="training-item reveal">
+                    <div class="training-number">03</div>
+                    <div class="training-content">
                         <h3>Remote Programming</h3>
-                        <span class="number">03</span>
+                        <p>For athletes training at their home facilities with professional guidance. Comprehensive programming and analysis without geographic limitations.</p>
+                        <ul class="training-features">
+                            <li>Weekly check-ins</li>
+                            <li>Personalized programs</li>
+                            <li>Video analysis</li>
+                            <li>Competition prep</li>
+                        </ul>
                     </div>
-                    <p>For athletes training at their home facilities with professional guidance. Comprehensive programming and analysis without geographic limitations.</p>
-                    <ul>
-                        <li>Weekly check-ins</li>
-                        <li>Personalized programs</li>
-                        <li>Video analysis</li>
-                        <li>Competition prep</li>
-                    </ul>
                 </div>
             </div>
         </div>
@@ -890,101 +1657,104 @@
     <!-- Pricing -->
     <section id="pricing" class="pricing">
         <div class="container">
-            <div class="section-label" style="color: rgba(255,255,255,0.5);">TRANSPARENT RATES</div>
-            <h2 class="section-title">Pricing</h2>
-            
-            <div class="pricing-grid">
-                <div class="pricing-item">
-                    <h3>INDIVIDUAL SESSIONS</h3>
-                    <div class="price">$100<span class="price-unit">per hour</span></div>
-                    <p>One-on-one personalized coaching with complete attention to technique and programming development.</p>
-                </div>
-                
-                <div class="pricing-item">
-                    <h3>SMALL GROUP TRAINING</h3>
-                    <div class="price">$50<span class="price-unit">per athlete/hour</span></div>
-                    <p>Quality coaching in competitive training environment. Maximum 4 athletes per session.</p>
-                </div>
-                
-                <div class="pricing-item">
-                    <h3>MONTHLY REMOTE COACHING</h3>
-                    <div class="price">$300<span class="price-unit">per month</span></div>
-                    <p>Comprehensive programming, video analysis, and weekly check-ins for remote athletes.</p>
-                </div>
+            <div class="section-header reveal">
+                <div class="section-label" style="color: rgba(255,255,255,0.4);">Transparent Rates</div>
+                <h2 class="section-title" style="color: var(--white);">Pricing</h2>
             </div>
-            
-            <p class="pricing-note">All services priced at fair market value in accordance with industry standards and NCAA compliance requirements.</p>
-        </div>
-    </section>
 
-    <!-- Compliance -->
-    <section id="compliance" class="compliance">
-        <div class="container">
-            <div class="section-label">REGULATIONS</div>
-            <h2 class="section-title">NCAA Compliance</h2>
-            
-            <div style="margin-top: 3rem;">
-                <div class="compliance-box">
-                    <h3>Institutional Disclosure</h3>
-                    <p>Coach Sommers reports all outside coaching income to UC San Diego as required by <strong>NCAA Bylaw 11.2.2</strong>. All business activities receive proper institutional approval and oversight.</p>
-                </div>
-                
-                <div class="compliance-box">
-                    <h3>High School Athletes (Prospective Student-Athletes)</h3>
-                    <p>Due to NCAA recruiting regulations (<strong>Bylaw 13.11.2.4</strong>), we can only provide track & field throws training to high school athletes who are <strong>legal residents within 50 miles of UC San Diego's campus</strong> in La Jolla, California.</p>
-                    <div class="compliance-alert">
-                        <strong>CRITICAL:</strong> This 50-mile radius requirement ensures full compliance with NCAA local sports club regulations and protects both athlete and institution.
+            <div class="pricing-grid">
+                <div class="pricing-item reveal">
+                    <div class="pricing-label">Individual Sessions</div>
+                    <div class="pricing-amount">
+                        <span class="pricing-currency">$</span>
+                        <span class="pricing-value">100</span>
                     </div>
+                    <div class="pricing-unit">per hour</div>
+                    <p class="pricing-description">One-on-one personalized coaching with complete attention to technique and programming development.</p>
                 </div>
-                
-                <div class="compliance-box">
-                    <h3>Current College Athletes</h3>
-                    <p>Athletes from all NCAA institutions are welcome. Training services provided at <strong>fair market rates</strong> and not affiliated with recruiting inducements or institutional incentives. Athletes responsible for ensuring expenses comply with their institution's policies.</p>
+
+                <div class="pricing-item reveal reveal-delay-1">
+                    <div class="pricing-label">Small Group Training</div>
+                    <div class="pricing-amount">
+                        <span class="pricing-currency">$</span>
+                        <span class="pricing-value">50</span>
+                    </div>
+                    <div class="pricing-unit">per athlete / hour</div>
+                    <p class="pricing-description">Quality coaching in competitive training environment. Maximum 4 athletes per session.</p>
                 </div>
-                
-                <div class="compliance-box">
-                    <h3>Fair Market Value & No Pay-for-Play</h3>
-                    <p>All coaching services priced at rates commensurate with the going rate in San Diego for similar professional services. Training fees are for coaching services only and <strong>not tied to athletic performance, recruiting decisions, or institutional affiliation</strong>.</p>
+
+                <div class="pricing-item reveal reveal-delay-2">
+                    <div class="pricing-label">Monthly Remote Coaching</div>
+                    <div class="pricing-amount">
+                        <span class="pricing-currency">$</span>
+                        <span class="pricing-value">300</span>
+                    </div>
+                    <div class="pricing-unit">per month</div>
+                    <p class="pricing-description">Comprehensive programming, video analysis, and weekly check-ins for remote athletes.</p>
                 </div>
             </div>
+
+            <p class="pricing-note reveal">All services priced at fair market value in accordance with industry standards and NCAA compliance requirements.</p>
         </div>
     </section>
 
     <!-- FAQ -->
     <section id="faq" class="faq">
         <div class="container">
-            <div class="section-label">QUESTIONS</div>
-            <h2 class="section-title">FAQ</h2>
-            
-            <div style="margin-top: 3rem;">
-                <div class="faq-item">
-                    <h3>I'm a high school thrower outside San Diego. Can I train with you?</h3>
-                    <p><strong>A:</strong> Due to NCAA compliance rules, I cannot provide in-person throws coaching to high school athletes outside the 50-mile radius of UC San Diego. However, I can offer remote programming and video analysis services, which are not subject to the same geographic restrictions.</p>
+            <div class="section-header reveal">
+                <div class="section-label">Questions</div>
+                <h2 class="section-title">Frequently <span>Asked</span></h2>
+            </div>
+
+            <div class="faq-list">
+                <div class="faq-item reveal">
+                    <div class="faq-question">
+                        <h3>I'm a high school thrower outside San Diego. Can I train with you?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Due to NCAA compliance rules, I cannot provide in-person throws coaching to high school athletes outside the 50-mile radius of UC San Diego. However, I can offer remote programming and video analysis services, which are not subject to the same geographic restrictions.</p>
+                    </div>
                 </div>
-                
-                <div class="faq-item">
-                    <h3>I'm a college athlete at another university. Is this allowed?</h3>
-                    <p><strong>A:</strong> Yes. Current college athletes from any institution can train with Podium Athletics. Since you're already enrolled, you're no longer considered a "prospective student-athlete" under NCAA rules. You're responsible for ensuring any training expenses comply with your institution's policies.</p>
+
+                <div class="faq-item reveal">
+                    <div class="faq-question">
+                        <h3>I'm a college athlete at another university. Is this allowed?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes. Current college athletes from any institution can train with Podium Athletics. Since you're already enrolled, you're no longer considered a "prospective student-athlete" under NCAA rules. You're responsible for ensuring any training expenses comply with your institution's policies.</p>
+                    </div>
                 </div>
-                
-                <div class="faq-item">
-                    <h3>How do I know if I'm within the 50-mile radius?</h3>
-                    <p><strong>A:</strong> The radius is measured from UC San Diego's campus in La Jolla, California. This generally includes most of San Diego County and southern portions of Orange County. Contact us with your home address (city) and we can verify eligibility.</p>
+
+                <div class="faq-item reveal">
+                    <div class="faq-question">
+                        <h3>How do I know if I'm within the 50-mile radius?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The radius is measured from UC San Diego's campus in La Jolla, California. This generally includes most of San Diego County and southern portions of Orange County. Contact us with your home address (city) and we can verify eligibility.</p>
+                    </div>
                 </div>
-                
-                <div class="faq-item">
-                    <h3>What about NIL deals?</h3>
-                    <p><strong>A:</strong> Training services must be paid at fair market value. Podium Athletics does not engage in NIL agreements tied to recruiting inducements or institutional affiliation. All coaching is provided as a professional service at standard industry rates.</p>
+
+                <div class="faq-item reveal">
+                    <div class="faq-question">
+                        <h3>What about NIL deals?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Training services must be paid at fair market value. Podium Athletics does not engage in NIL agreements tied to recruiting inducements or institutional affiliation. All coaching is provided as a professional service at standard industry rates.</p>
+                    </div>
                 </div>
-                
-                <div class="faq-item">
-                    <h3>Can I train during my high school season?</h3>
-                    <p><strong>A:</strong> Yes, if you meet the 50-mile residency requirement. Training during your season is permissible under NCAA rules. Many athletes supplement their high school coaching with specialized technical work.</p>
-                </div>
-                
-                <div class="faq-item">
-                    <h3>Do you offer discounts for talented athletes?</h3>
-                    <p><strong>A:</strong> No. All athletes are charged the same fair market rates regardless of ability level. Providing discounted rates based on athletic ability would violate NCAA amateurism rules and compromise your eligibility.</p>
+
+                <div class="faq-item reveal">
+                    <div class="faq-question">
+                        <h3>Do you offer discounts for talented athletes?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No. All athletes are charged the same fair market rates regardless of ability level. Providing discounted rates based on athletic ability would violate NCAA amateurism rules and compromise your eligibility.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -993,38 +1763,44 @@
     <!-- Contact -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2>REACH THE<br>PODIUM</h2>
-            
-            <div class="contact-info">
+            <h2 class="reveal">Reach The<br>Podium</h2>
+
+            <div class="contact-info reveal reveal-delay-1">
                 <div class="contact-item">
-                    <div class="contact-label">EMAIL</div>
-                    <a href="mailto:coach@podiumathletics.com">toncafitness@gmail.com.com</a>
+                    <div class="contact-label">Email</div>
+                    <a href="mailto:toncafitness@gmail.com">toncafitness@gmail.com</a>
                 </div>
-                
+
                 <div class="contact-item">
-                    <div class="contact-label">PHONE</div>
-                    <a href="tel:+15555551234">(760) 672-4519</a>
+                    <div class="contact-label">Phone</div>
+                    <a href="tel:+17606724519">(760) 672-4519</a>
                 </div>
-                
+
                 <div class="contact-item">
-                    <div class="contact-label">LOCATION</div>
+                    <div class="contact-label">Location</div>
                     <p>San Diego, CA</p>
                 </div>
             </div>
-            
-            <a href="mailto:coach@podiumathletics.com" class="cta">SCHEDULE CONSULTATION</a>
+
+            <div class="reveal reveal-delay-2">
+                <a href="mailto:toncafitness@gmail.com" class="btn btn-primary">
+                    <span>Schedule Consultation</span>
+                    <span class="btn-arrow">→</span>
+                </a>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>© 2025 PODIUM ATHLETICS — All rights reserved</p>
-            <p>Operating in full compliance with NCAA regulations | Coach Tony Sommers, UC San Diego Track & Field</p>
+            <div class="logo">PODIUM <span>ATHLETICS</span></div>
+            <p>© 2025 Podium Athletics — Operating in full compliance with NCAA regulations</p>
         </div>
     </footer>
 
     <script>
+        // Mobile menu toggle
         function toggleMenu() {
             document.getElementById('nav-menu').classList.toggle('active');
         }
@@ -1033,6 +1809,50 @@
         document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('click', () => {
                 document.getElementById('nav-menu').classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealOnScroll = () => {
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // FAQ accordion
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+
+                // Close all items
+                document.querySelectorAll('.faq-item').forEach(faq => {
+                    faq.classList.remove('active');
+                });
+
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                }
             });
         });
 
@@ -1050,6 +1870,70 @@
                 }
             });
         });
+
+        // Form submission handler
+        function handleSubmit(e) {
+            e.preventDefault();
+            const form = e.target;
+            const button = form.querySelector('button');
+            const originalText = button.innerHTML;
+
+            button.innerHTML = '<span>Sending...</span>';
+            button.disabled = true;
+
+            // Simulate form submission
+            setTimeout(() => {
+                button.innerHTML = '<span>Check Your Inbox!</span>';
+                button.style.background = '#22c55e';
+                form.reset();
+
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.background = '';
+                    button.disabled = false;
+                }, 3000);
+            }, 1500);
+        }
+
+        // Counter animation for stats
+        const animateCounters = () => {
+            const counters = document.querySelectorAll('.stat-number');
+
+            counters.forEach(counter => {
+                const text = counter.innerText;
+                if (text.includes('+') || text.includes('%') || text === 'D1') return;
+
+                const target = parseInt(text);
+                if (isNaN(target)) return;
+
+                let current = 0;
+                const increment = target / 50;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        counter.innerText = text;
+                        clearInterval(timer);
+                    } else {
+                        counter.innerText = Math.floor(current);
+                    }
+                }, 30);
+            });
+        };
+
+        // Trigger counter animation when stats are visible
+        const statsSection = document.querySelector('.hero-stats');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
     </script>
 </body>
 </html>
