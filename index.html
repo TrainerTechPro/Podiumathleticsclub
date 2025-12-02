@@ -8,7 +8,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200;12..96,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -20,14 +20,15 @@
         :root {
             --black: #0a0a0a;
             --white: #fafafa;
-            --red: #ff0000;
-            --gray: #888;
-            --light-gray: #e8e8e8;
+            --gold: #C9A227;
+            --gray: #6b6b6b;
+            --light-gray: #d4d4d4;
+            --dark-gray: #2a2a2a;
         }
 
         body {
-            font-family: 'Bricolage Grotesque', sans-serif;
-            font-weight: 200;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 400;
             line-height: 1.5;
             color: var(--black);
             background: var(--white);
@@ -49,7 +50,7 @@
         }
 
         strong {
-            font-weight: 800;
+            font-weight: 700;
         }
 
         /* Navigation */
@@ -73,12 +74,12 @@
 
         nav .logo {
             font-size: 1rem;
-            font-weight: 800;
+            font-weight: 700;
             letter-spacing: 0.05em;
         }
 
         nav .logo span {
-            color: var(--red);
+            color: var(--gold);
         }
 
         nav ul {
@@ -90,7 +91,7 @@
         nav a {
             color: var(--black);
             text-decoration: none;
-            font-weight: 200;
+            font-weight: 400;
             font-size: 0.9rem;
             transition: opacity 0.2s;
             letter-spacing: 0.02em;
@@ -102,7 +103,7 @@
 
         .mobile-menu {
             display: none;
-            font-weight: 800;
+            font-weight: 700;
             font-size: 1.5rem;
             background: none;
             border: none;
@@ -128,7 +129,7 @@
             left: 50%;
             width: 800px;
             height: 800px;
-            background: radial-gradient(circle, rgba(255,0,0,0.15) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(201,162,39,0.2) 0%, transparent 70%);
             transform: translate(-50%, -50%);
         }
 
@@ -142,7 +143,7 @@
 
         .hero h1 {
             font-size: clamp(3rem, 12vw, 9rem);
-            font-weight: 800;
+            font-weight: 700;
             line-height: 0.9;
             letter-spacing: -0.03em;
             margin-bottom: 2rem;
@@ -151,7 +152,7 @@
 
         .hero .subtitle {
             font-size: clamp(1.2rem, 3vw, 2rem);
-            font-weight: 200;
+            font-weight: 400;
             margin-bottom: 3rem;
             max-width: 600px;
             opacity: 0;
@@ -171,16 +172,16 @@
             font-size: 0.85rem;
             letter-spacing: 0.1em;
             text-transform: uppercase;
-            font-weight: 200;
+            font-weight: 400;
         }
 
         .hero .cta {
             display: inline-block;
             padding: 1.2rem 3rem;
-            background: var(--red);
+            background: var(--gold);
             color: var(--white);
             text-decoration: none;
-            font-weight: 800;
+            font-weight: 700;
             font-size: 0.9rem;
             letter-spacing: 0.05em;
             transition: transform 0.2s;
@@ -225,12 +226,12 @@
             text-transform: uppercase;
             color: var(--gray);
             margin-bottom: 1rem;
-            font-weight: 200;
+            font-weight: 400;
         }
 
         .section-title {
             font-size: clamp(2.5rem, 6vw, 5rem);
-            font-weight: 800;
+            font-weight: 700;
             line-height: 1;
             letter-spacing: -0.02em;
             margin-bottom: 2rem;
@@ -239,7 +240,7 @@
         .large-text {
             font-size: clamp(1.2rem, 2.5vw, 1.8rem);
             line-height: 1.4;
-            font-weight: 200;
+            font-weight: 400;
         }
 
         /* About section - asymmetric */
@@ -258,7 +259,7 @@
             padding: 1.5rem;
             border-left: 3px solid var(--black);
             font-size: 1rem;
-            font-weight: 200;
+            font-weight: 400;
         }
 
         /* Who we serve - full width cards */
@@ -288,28 +289,28 @@
 
         .serve-item h3 {
             font-size: clamp(1.5rem, 3vw, 2.5rem);
-            font-weight: 800;
+            font-weight: 700;
             line-height: 1.1;
         }
 
         .serve-item p {
             font-size: 1.1rem;
             line-height: 1.6;
-            font-weight: 200;
+            font-weight: 400;
         }
 
         .warning {
-            background: var(--red);
+            background: var(--gold);
             color: var(--white);
             padding: 1rem 1.5rem;
             margin-top: 1rem;
             font-size: 0.9rem;
-            font-weight: 200;
+            font-weight: 400;
             border-left: 3px solid var(--white);
         }
 
         .warning strong {
-            font-weight: 800;
+            font-weight: 700;
         }
 
         /* Philosophy - grid */
@@ -333,21 +334,21 @@
 
         .philosophy-item h3 {
             font-size: 1.3rem;
-            font-weight: 800;
+            font-weight: 700;
             margin-bottom: 1rem;
-            color: var(--red);
+            color: var(--gold);
         }
 
         .philosophy-item p {
             font-size: 0.95rem;
             line-height: 1.5;
-            font-weight: 200;
+            font-weight: 400;
         }
 
         .philosophy-motto {
             margin-top: 4rem;
             font-size: clamp(1.5rem, 4vw, 3rem);
-            font-weight: 800;
+            font-weight: 700;
             text-align: center;
             line-height: 1.2;
         }
@@ -381,20 +382,20 @@
 
         .training-item h3 {
             font-size: clamp(1.8rem, 4vw, 3rem);
-            font-weight: 800;
+            font-weight: 700;
             line-height: 1;
         }
 
         .training-item .number {
             font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--red);
+            font-weight: 700;
+            color: var(--gold);
         }
 
         .training-item p {
             font-size: 1.1rem;
             margin-bottom: 1.5rem;
-            font-weight: 200;
+            font-weight: 400;
         }
 
         .training-item ul {
@@ -407,13 +408,13 @@
         .training-item li {
             font-size: 0.95rem;
             padding: 0.5rem 0;
-            font-weight: 200;
+            font-weight: 400;
         }
 
         .training-item li::before {
             content: '→ ';
-            color: var(--red);
-            font-weight: 800;
+            color: var(--gold);
+            font-weight: 700;
         }
 
         /* Pricing - large numbers */
@@ -436,22 +437,22 @@
 
         .pricing-item h3 {
             font-size: 1.2rem;
-            font-weight: 200;
+            font-weight: 400;
             margin-bottom: 2rem;
             letter-spacing: 0.05em;
         }
 
         .price {
             font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 800;
+            font-weight: 700;
             line-height: 0.9;
-            color: var(--red);
+            color: var(--gold);
             margin-bottom: 0.5rem;
         }
 
         .price-unit {
             font-size: 1rem;
-            font-weight: 200;
+            font-weight: 400;
             display: block;
             margin-top: 0.5rem;
         }
@@ -460,13 +461,13 @@
             margin-top: 2rem;
             font-size: 0.95rem;
             line-height: 1.5;
-            font-weight: 200;
+            font-weight: 400;
         }
 
         .pricing-note {
             margin-top: 3rem;
             font-size: 0.9rem;
-            font-weight: 200;
+            font-weight: 400;
             opacity: 0.7;
             text-align: center;
         }
@@ -484,27 +485,27 @@
         }
 
         .compliance-box:nth-child(odd) {
-            border-left-color: var(--red);
+            border-left-color: var(--gold);
         }
 
         .compliance-box h3 {
             font-size: 1.5rem;
-            font-weight: 800;
+            font-weight: 700;
             margin-bottom: 1rem;
         }
 
         .compliance-box p {
             font-size: 1rem;
             line-height: 1.6;
-            font-weight: 200;
+            font-weight: 400;
         }
 
         .compliance-box strong {
-            font-weight: 800;
+            font-weight: 700;
         }
 
         .compliance-alert {
-            background: var(--red);
+            background: var(--gold);
             color: var(--white);
             padding: 1rem 1.5rem;
             margin-top: 1rem;
@@ -527,7 +528,7 @@
 
         .faq-item h3 {
             font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-            font-weight: 800;
+            font-weight: 700;
             margin-bottom: 1rem;
             line-height: 1.3;
         }
@@ -535,13 +536,13 @@
         .faq-item p {
             font-size: 1rem;
             line-height: 1.7;
-            font-weight: 200;
+            font-weight: 400;
             max-width: 900px;
         }
 
         /* Contact - bold CTA */
         .contact {
-            background: var(--red);
+            background: var(--gold);
             color: var(--white);
             text-align: center;
             padding: 10rem 2rem;
@@ -549,7 +550,7 @@
 
         .contact h2 {
             font-size: clamp(3rem, 8vw, 7rem);
-            font-weight: 800;
+            font-weight: 700;
             line-height: 1;
             margin-bottom: 2rem;
         }
@@ -572,7 +573,7 @@
             text-transform: uppercase;
             opacity: 0.7;
             margin-bottom: 0.5rem;
-            font-weight: 200;
+            font-weight: 400;
         }
 
         .contact-item a,
@@ -580,7 +581,7 @@
             color: var(--white);
             text-decoration: none;
             font-size: 1.3rem;
-            font-weight: 800;
+            font-weight: 700;
             transition: opacity 0.2s;
         }
 
@@ -594,7 +595,7 @@
             background: var(--white);
             color: var(--black);
             text-decoration: none;
-            font-weight: 800;
+            font-weight: 700;
             font-size: 1rem;
             letter-spacing: 0.05em;
             transition: transform 0.2s;
@@ -612,7 +613,7 @@
             padding: 3rem 2rem;
             text-align: center;
             font-size: 0.85rem;
-            font-weight: 200;
+            font-weight: 400;
             opacity: 0.7;
         }
 
@@ -780,7 +781,7 @@
                 </div>
                 
                 <div class="serve-item">
-                    <h3>High School Athletes<br><span style="font-size: 0.6em; font-weight: 200;">(RESTRICTED)</span></h3>
+                    <h3>High School Athletes<br><span style="font-size: 0.6em; font-weight: 400;">(RESTRICTED)</span></h3>
                     <div>
                         <p>Limited availability due to NCAA regulations. Training services for high school athletes are restricted to ensure full compliance with NCAA recruiting bylaws.</p>
                         <div class="warning">
