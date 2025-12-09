@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PODIUM ATHLETICS — Elite Throws Training</title>
-    <meta name="description" content="NCAA Division I throws coaching expertise. Specialized training in shot put, discus, hammer throw, and javelin. Evidence-based performance coaching in San Diego.">
+    <title>PODIUM ATHLETICS CLUB — San Diego Throws Training</title>
+    <meta name="description" content="San Diego's premier throws training club. Join athletes of all levels — masters, post-collegiate, high school, middle school, and unattached — preparing for track season with D1 coaching.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -406,6 +406,156 @@
             text-transform: uppercase;
             letter-spacing: 0.15em;
             color: rgba(255,255,255,0.5);
+        }
+
+        /* Join the Club Section */
+        .club {
+            background: var(--white);
+            position: relative;
+            padding: 6rem 2rem;
+            overflow: hidden;
+        }
+
+        .club::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+        }
+
+        .club .container {
+            max-width: 1200px;
+        }
+
+        .club-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .club-header .section-label::before {
+            display: none;
+        }
+
+        .club-header .section-label {
+            justify-content: center;
+        }
+
+        .club-header h2 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            line-height: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .club-header p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .club-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .club-card {
+            background: var(--light-gray);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 2px solid transparent;
+        }
+
+        .club-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 3px;
+            background: var(--gold);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .club-card:hover {
+            background: var(--black);
+            color: var(--white);
+            transform: translateY(-8px);
+            border-color: var(--gold);
+        }
+
+        .club-card:hover::before {
+            opacity: 1;
+            width: 60px;
+        }
+
+        .club-card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .club-card h3 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .club-card p {
+            font-size: 0.85rem;
+            color: var(--gray);
+            line-height: 1.5;
+        }
+
+        .club-card:hover p {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .club-cta {
+            text-align: center;
+            padding: 3rem;
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .club-cta h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .club-cta h3 span {
+            color: var(--gold);
+        }
+
+        .club-cta p {
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 1024px) {
+            .club-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .club-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .club-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* Email Squeeze Section */
@@ -1402,11 +1552,11 @@
     <!-- Navigation -->
     <nav id="navbar">
         <div class="container">
-            <div class="logo">PODIUM <span>ATHLETICS</span></div>
+            <div class="logo">PODIUM <span>ATHLETICS CLUB</span></div>
             <button class="mobile-menu" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
             <ul id="nav-menu">
+                <li><a href="#join">Join</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#serve">Athletes</a></li>
                 <li><a href="#philosophy">Philosophy</a></li>
                 <li><a href="#training">Training</a></li>
                 <li><a href="#pricing">Pricing</a></li>
@@ -1452,6 +1602,58 @@
                     <div class="stat-number">100%</div>
                     <div class="stat-label">NCAA Compliant</div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join the Club Section -->
+    <section class="club" id="join">
+        <div class="container">
+            <div class="club-header reveal">
+                <div class="section-label">Track Season Is Coming</div>
+                <h2>Join <span>Podium Athletics Club</span></h2>
+                <p>San Diego's home for throwers. Whether you're chasing PRs, returning to competition, or just getting started — there's a place for you on the podium.</p>
+            </div>
+
+            <div class="club-grid">
+                <div class="club-card reveal">
+                    <div class="club-card-icon">🎓</div>
+                    <h3>High School</h3>
+                    <p>Build your foundation and compete at the next level</p>
+                </div>
+
+                <div class="club-card reveal reveal-delay-1">
+                    <div class="club-card-icon">📚</div>
+                    <h3>Middle School</h3>
+                    <p>Learn proper technique from day one</p>
+                </div>
+
+                <div class="club-card reveal reveal-delay-2">
+                    <div class="club-card-icon">🏛️</div>
+                    <h3>Post-Collegiate</h3>
+                    <p>Continue your competitive journey after college</p>
+                </div>
+
+                <div class="club-card reveal reveal-delay-3">
+                    <div class="club-card-icon">⭐</div>
+                    <h3>Masters</h3>
+                    <p>Age-group excellence with smart programming</p>
+                </div>
+
+                <div class="club-card reveal reveal-delay-4">
+                    <div class="club-card-icon">🎯</div>
+                    <h3>Unattached</h3>
+                    <p>Train and compete without school affiliation</p>
+                </div>
+            </div>
+
+            <div class="club-cta reveal">
+                <h3>The <span>2025 Track Season</span> Starts Now</h3>
+                <p>Don't wait until meets begin. Build your technique, strength, and competition mindset this off-season.</p>
+                <a href="#contact" class="btn btn-primary">
+                    <span>Start Training With Us</span>
+                    <span class="btn-arrow">→</span>
+                </a>
             </div>
         </div>
     </section>
@@ -1746,8 +1948,8 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="logo">PODIUM <span>ATHLETICS</span></div>
-            <p>© 2025 Podium Athletics — Operating in full compliance with NCAA regulations</p>
+            <div class="logo">PODIUM <span>ATHLETICS CLUB</span></div>
+            <p>© 2025 Podium Athletics Club — Operating in full compliance with NCAA regulations</p>
         </div>
     </footer>
 
